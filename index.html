@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      Ammar Ahmed Saleh — Front-End Developer | Modern Web Experiences
+    </title>
+    <meta
+      name="title"
+      content="Ammar Ahmed Saleh — Front-End Developer | Modern Web Experiences"
+    />
+    <meta
+      name="description"
+      content="Full-stack developer specializing in React, Node.js, and modern web technologies. Building dynamic, user-friendly applications with cutting-edge solutions."
+    />
+    <meta name="author" content="Ammar Ahmed Saleh" />
+    <meta
+      name="keywords"
+      content="Front-End Developer, Full-Stack Developer, React, Node.js, JavaScript, Web Development, Portfolio"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ammarahmedsaleh.dev/" />
+    <meta
+      property="og:title"
+      content="Ammar Ahmed Saleh — Front-End Developer"
+    />
+    <meta
+      property="og:description"
+      content="Full-stack developer specializing in React, Node.js, and modern web technologies. Building dynamic, user-friendly applications."
+    />
+    <meta
+      property="og:image"
+      content="https://ammarahmedsaleh.dev/og-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://ammarahmedsaleh.dev/" />
+    <meta
+      property="twitter:title"
+      content="Ammar Ahmed Saleh — Front-End Developer"
+    />
+    <meta
+      property="twitter:description"
+      content="Full-stack developer specializing in React, Node.js, and modern web technologies."
+    />
+    <meta
+      property="twitter:image"
+      content="https://ammarahmedsaleh.dev/og-image.jpg"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Critical CSS inlined for performance -->
+    <style>
+      :root {
+        --bg: #0a0f16;
+        --text: #e6eef6;
+        --primary: #007bff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        z-index: 9999;
+        text-decoration: none;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+    </style>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ammar Ahmed",
+        "jobTitle": "Front-End Developer",
+        "url": "https://ammarahmedsaleh.dev",
+        "sameAs": [
+          "https://github.com/ammarsaleh111",
+          "https://www.linkedin.com/in/ammarahmedsaleh/"
+        ],
+        "knowsAbout": [
+          "JavaScript",
+          "React",
+          "Node.js",
+          "Web Development",
+          "UI/UX Design"
+        ],
+        "description": "Full-stack developer specializing in creating dynamic, user-friendly applications with cutting-edge technologies."
+      }
+    </script>
+
+    <!-- Theme Detection Script (runs immediately to prevent flash) -->
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <header>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="container nav-inner">
+          <div class="brand" aria-label="Portfolio home">
+            <a href="#home" aria-label="Go to homepage">Portfolio</a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <ul class="nav-links" id="navMenu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#download">CV</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <div class="nav-controls">
+            <!-- Theme Toggle -->
+            <button
+              id="themeToggle"
+              class="theme-toggle"
+              aria-label="Toggle dark/light theme"
+              aria-live="polite"
+            >
+              <span class="theme-icon" aria-hidden="true"></span>
+            </button>
+
+            <!-- Mobile Menu Toggle -->
+            <button
+              id="menuToggle"
+              class="menu-toggle"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="navMenu"
+            >
+              <span class="hamburger" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- HERO SECTION -->
+      <section id="home" class="section hero" aria-labelledby="hero-heading">
+        <div id="particles-js" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <h1 id="hero-heading" class="headline">
+              Hi, I'm <span class="name">Ammar Ahmed</span> —
+              <span class="role">Front-End Developer</span>
+            </h1>
+            <p class="subhead">Building Modern Web Experiences</p>
+            <p class="lead">
+              Passionate developer specializing in creating dynamic,
+              user-friendly applications with cutting-edge technologies.
+              Transforming ideas into powerful digital solutions.
+            </p>
+            <div class="hero-ctas">
+              <a
+                class="btn primary"
+                href="#projects"
+                aria-label="View my projects"
+              >
+                View Projects
+              </a>
+              <a
+                class="btn outline"
+                href="#download"
+                aria-label="Download my CV"
+              >
+                Download CV
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <figure class="media-frame">
+              <img
+                src="me.jpg"
+                alt="Portrait of Ammar Ahmed Saleh, Front-End Developer"
+                width="600"
+                height="600"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </div>
+
+        <a
+          href="#about"
+          class="scroll-down"
+          aria-label="Scroll to About section"
+        >
+          <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="section about" aria-labelledby="about-heading">
+        <div class="container">
+          <h2 id="about-heading" class="section-title">
+            About <span>Me</span>
+          </h2>
+          <p class="about-desc">
+            I'm a passionate full-stack developer with expertise in modern web
+            technologies. I love building innovative solutions that solve
+            real-world problems and create exceptional user experiences. With a
+            keen eye for design and a commitment to quality, I bring ideas to
+            life through code.
+          </p>
+
+          <div class="cards">
+            <article class="card">
+              <div class="icon" aria-hidden="true">&lt;/&gt;</div>
+              <h3>Clean Code</h3>
+              <p>
+                Writing maintainable, scalable code following best practices.
+              </p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true">🎨</div>
+              <h3>UI/UX Design</h3>
+              <p>Creating beautiful, intuitive user interfaces.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true">⚡</div>
+              <h3>Performance</h3>
+              <p>Optimizing applications for speed and efficiency.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true">🚀</div>
+              <h3>Innovation</h3>
+              <p>Staying ahead with the latest technologies and trends.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section
+        id="projects"
+        class="section projects"
+        aria-labelledby="projects-heading"
+      >
+        <div class="container">
+          <h2 id="projects-heading" class="section-title">
+            My <span>Projects</span>
+          </h2>
+          <p class="projects-desc">
+            Here are some of my recent projects showcasing my skills across
+            different technologies.
+          </p>
+
+          <div class="filters" role="group" aria-label="Project filters">
+            <button class="filter active" data-filter="all" aria-pressed="true">
+              All
+            </button>
+            <button class="filter" data-filter="web" aria-pressed="false">
+              Web
+            </button>
+            <button class="filter" data-filter="java" aria-pressed="false">
+              Java
+            </button>
+            <button class="filter" data-filter="frontend" aria-pressed="false">
+              Front-End
+            </button>
+          </div>
+
+          <div class="project-grid" id="projectGrid">
+            <article class="project-card" data-category="web frontend">
+              <div class="thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop&q=80"
+                  alt="E-Commerce Platform project screenshot showing product grid and shopping cart"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="proj-body">
+                <h3>E-Commerce Platform</h3>
+                <p>
+                  Full-stack e-commerce solution with payment integration, admin
+                  dashboard, and real-time inventory management.
+                </p>
+                <div class="tags" role="list">
+                  <span role="listitem">React</span>
+                  <span role="listitem">Node.js</span>
+                  <span role="listitem">MongoDB</span>
+                  <span role="listitem">Stripe</span>
+                </div>
+                <div class="proj-actions">
+                  <a
+                    class="btn small"
+                    href="https://demo.example.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View E-Commerce Platform demo"
+                  >
+                    Demo
+                  </a>
+                  <a
+                    class="btn small outline"
+                    href="https://github.com/ammarsaleh111/ecommerce"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View E-Commerce Platform source code"
+                  >
+                    Code
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-category="web frontend">
+              <div class="thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop&q=80"
+                  alt="Task Management System project screenshot with kanban board"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="proj-body">
+                <h3>Task Management System</h3>
+                <p>
+                  Collaborative task management app with real-time updates,
+                  drag-and-drop interface, and team analytics.
+                </p>
+                <div class="tags" role="list">
+                  <span role="listitem">React</span>
+                  <span role="listitem">Firebase</span>
+                  <span role="listitem">Tailwind</span>
+                </div>
+                <div class="proj-actions">
+                  <a
+                    class="btn small"
+                    href="https://demo.example.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Task Management System demo"
+                  >
+                    Demo
+                  </a>
+                  <a
+                    class="btn small outline"
+                    href="https://github.com/ammarsaleh111/task-manager"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Task Management System source code"
+                  >
+                    Code
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-category="java backend">
+              <div class="thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&q=80"
+                  alt="Spring Boot Microservices architecture diagram"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="proj-body">
+                <h3>Spring Boot Microservices</h3>
+                <p>
+                  Scalable microservices architecture with service discovery,
+                  API gateway, and distributed tracing.
+                </p>
+                <div class="tags" role="list">
+                  <span role="listitem">Java</span>
+                  <span role="listitem">Spring Boot</span>
+                  <span role="listitem">Docker</span>
+                  <span role="listitem">Kubernetes</span>
+                </div>
+                <div class="proj-actions">
+                  <a
+                    class="btn small"
+                    href="https://demo.example.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Spring Boot Microservices demo"
+                  >
+                    Demo
+                  </a>
+                  <a
+                    class="btn small outline"
+                    href="https://github.com/ammarsaleh111/microservices"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Spring Boot Microservices source code"
+                  >
+                    Code
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- DOWNLOAD CV SECTION -->
+      <section
+        id="download"
+        class="section download"
+        aria-labelledby="download-heading"
+      >
+        <div class="container">
+          <h2 id="download-heading" class="section-title">
+            Download My <span>CV</span>
+          </h2>
+          <p class="download-desc">
+            Get a comprehensive overview of my skills, experience, and
+            achievements.
+          </p>
+
+          <div class="download-stats">
+            <div class="stat">
+              <div class="stat-icon" aria-hidden="true">🎓</div>
+              <h3>
+                <span class="count" data-target="5" aria-label="5 plus years"
+                  >0</span
+                >+ Years Experience
+              </h3>
+              <p>Professional software development</p>
+            </div>
+            <div class="stat">
+              <div class="stat-icon" aria-hidden="true">📁</div>
+              <h3>
+                <span
+                  class="count"
+                  data-target="15"
+                  aria-label="15 plus projects"
+                  >0</span
+                >+ Projects
+              </h3>
+              <p>Successfully delivered projects</p>
+            </div>
+            <div class="stat">
+              <div class="stat-icon" aria-hidden="true">🧩</div>
+              <h3>Full Stack</h3>
+              <p>Frontend & Backend expertise</p>
+            </div>
+          </div>
+
+          <div class="cv-panel">
+            <div class="cv-inner">
+              <div class="cv-icon" aria-hidden="true">📄</div>
+              <h3>Ready to learn more about my background?</h3>
+              <p class="cv-text">
+                Download my CV to see my complete work history, education,
+                certifications, and detailed project descriptions.
+              </p>
+
+              <a
+                id="downloadBtn"
+                class="btn big primary cv-cta"
+                href="Ammar-Ahmed-Saleh-CV.pdf"
+                download="Ammar-Ahmed-Saleh-CV.pdf"
+                aria-label="Download CV as PDF file"
+              >
+                ⬇ Download CV (PDF)
+              </a>
+
+              <p class="cv-meta">
+                Last updated: November 2025 • File size: ~250KB
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section
+        id="contact"
+        class="section contact"
+        aria-labelledby="contact-heading"
+      >
+        <div class="container contact-grid">
+          <div>
+            <h2 id="contact-heading" class="section-title">
+              Get In <span>Touch</span>
+            </h2>
+            <p class="contact-desc">
+              Have a project in mind? Let's work together to create something
+              amazing!
+            </p>
+
+            <form
+              id="contactForm"
+              class="contact-form panel-left"
+              novalidate
+              aria-labelledby="contact-heading"
+            >
+              <div class="form-group">
+                <label for="from_name" class="sr-only">Your Name</label>
+                <input
+                  type="text"
+                  id="from_name"
+                  name="from_name"
+                  placeholder="Your Name"
+                  required
+                  aria-required="true"
+                  aria-describedby="name-error"
+                />
+                <span id="name-error" class="error-message" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="reply_to" class="sr-only">Your Email</label>
+                <input
+                  type="email"
+                  id="reply_to"
+                  name="reply_to"
+                  placeholder="Your Email"
+                  required
+                  aria-required="true"
+                  aria-describedby="email-error"
+                />
+                <span
+                  id="email-error"
+                  class="error-message"
+                  role="alert"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="sr-only">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Your Message"
+                  rows="8"
+                  required
+                  aria-required="true"
+                  aria-describedby="message-error"
+                ></textarea>
+                <span
+                  id="message-error"
+                  class="error-message"
+                  role="alert"
+                ></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn primary">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-loading" aria-hidden="true">Sending...</span>
+                </button>
+              </div>
+
+              <div
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                class="form-status"
+              ></div>
+            </form>
+          </div>
+
+          <aside class="panel-right">
+            <div class="connect">
+              <h3>Connect With Me</h3>
+              <p>
+                Feel free to reach out through any of these platforms. I'm
+                always open to discussing new projects, creative ideas, or
+                opportunities to be part of your visions.
+              </p>
+
+              <div class="connect-links">
+                <a
+                  class="btn outline"
+                  href="https://github.com/ammarsaleh111"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit my GitHub profile"
+                >
+                  <span aria-hidden="true">📱</span> GitHub
+                </a>
+                <a
+                  class="btn outline"
+                  href="https://www.linkedin.com/in/ammarahmedsaleh/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit my LinkedIn profile"
+                >
+                  <span aria-hidden="true">💼</span> LinkedIn
+                </a>
+                <a
+                  class="btn outline"
+                  href="mailto:ammar@example.com?subject=Hello%20Ammar&body=I%20saw%20your%20portfolio!"
+                  aria-label="Send me an email"
+                >
+                  <span aria-hidden="true">✉️</span> Email
+                </a>
+              </div>
+            </div>
+
+            <div class="response-time">
+              <h4>Response Time</h4>
+              <p>I typically respond within 24 hours</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <p>© <span id="year"></span> Ammar Ahmed Saleh. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Floating Back to Top Button -->
+    <button
+      id="backToTop"
+      class="back-to-top"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      ↑
+    </button>
+
+    <!-- Scripts loaded with defer for better performance -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"
+      defer
+    ></script>
+    <script src="scripts.js" defer></script>
+  </body>
+</html>
