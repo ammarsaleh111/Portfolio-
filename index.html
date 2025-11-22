@@ -221,18 +221,20 @@
             </div>
           </div>
 
-          <div class="hero-media">
-            <figure class="media-frame">
-              <img
-                src="me.jpg"
-                alt="Portrait of Ammar Ahmed Saleh, Front-End Developer"
-                width="600"
-                height="600"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </figure>
+          <!-- NEW: Floating Code Window -->
+          <div class="hero-visual">
+            <div class="hero-image-container">
+              <div class="code-window">
+                <div class="window-header">
+                  <span class="window-dot dot-red"></span>
+                  <span class="window-dot dot-yellow"></span>
+                  <span class="window-dot dot-green"></span>
+                </div>
+                <div class="code-content">
+                  <pre><code class="typing-code"></code></pre>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -251,13 +253,36 @@
           <h2 id="about-heading" class="section-title">
             About <span>Me</span>
           </h2>
-          <p class="about-desc">
-            I'm a passionate full-stack developer with expertise in modern web
-            technologies. I love building innovative solutions that solve
-            real-world problems and create exceptional user experiences. With a
-            keen eye for design and a commitment to quality, I bring ideas to
-            life through code.
-          </p>
+
+          <!-- NEW: Profile Section with Photo -->
+          <div class="about-profile">
+            <div class="about-profile-text">
+              <h3>Crafting Digital Experiences</h3>
+              <p>
+                I'm a passionate full-stack developer with expertise in modern
+                web technologies. I love building innovative solutions that
+                solve real-world problems and create exceptional user
+                experiences.
+              </p>
+              <p>
+                With a keen eye for design and a commitment to quality, I bring
+                ideas to life through code. Every project is an opportunity to
+                learn, grow, and push the boundaries of what's possible.
+              </p>
+            </div>
+            <div class="profile-image-container">
+              <figure class="profile-frame">
+                <img
+                  src="me.jpg"
+                  alt="Portrait of Ammar Ahmed Saleh, Front-End Developer"
+                  width="280"
+                  height="280"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </div>
 
           <div class="cards">
             <article class="card">

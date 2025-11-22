@@ -795,12 +795,11 @@ const lazyImages = {
 };
 
 // ==============================================
-// Performance Monitoring
+// Performance Monitoring (renamed to avoid shadowing window.performance)
 // ==============================================
-const performance = {
+const perfMonitor = {
   init() {
     if ('PerformanceObserver' in window) {
-      // Monitor Largest Contentful Paint
       try {
         const lcpObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
@@ -812,6 +811,137 @@ const performance = {
         // Observer not supported
       }
     }
+  }
+};
+// ==================== TYPING CODE ANIMATION ====================
+const typingCodeAnimation = {
+  codeLines: [
+    'const innovation = true;',
+    'function buildFuture() {',
+    '  return creative.code();',
+    '}',
+    '',
+    'class Developer {',
+    '  constructor() {',
+    '    this.passion = Infinity;',
+    '    this.creativity = "limitless";',
+    '  }',
+    '  ',
+    '  createMagic() {',
+    '    return this.passion * Math.pow(10, 3);',
+    '  }',
+    '}',
+    '',
+    '// Let\'s create magic ✨',
+    'const ammar = new Developer();',
+    'console.log(ammar.createMagic());'
+  ],
+  
+  lineIndex: 0,
+  charIndex: 0,
+  typingSpeed: 50,
+  lineDelay: 500,
+  
+  init() {
+    const codeElement = document.querySelector('.typing-code');
+    if (!codeElement) return;
+    
+    this.typeCode();
+  },
+  
+  typeCode() {
+    const codeElement = document.querySelector('.typing-code');
+    if (!codeElement) return;
+    
+    if (this.lineIndex < this.codeLines.length) {
+      if (this.charIndex < this.codeLines[this.lineIndex].length) {
+        codeElement.textContent += this.codeLines[this.lineIndex][this.charIndex];
+        this.charIndex++;
+        setTimeout(() => this.typeCode(), this.typingSpeed);
+      } else {
+        codeElement.textContent += '\n';
+        this.lineIndex++;
+        this.charIndex = 0;
+        setTimeout(() => this.typeCode(), this.lineDelay);
+      }
+    } else {
+      setTimeout(() => {
+        codeElement.textContent = '';
+        this.lineIndex = 0;
+        this.charIndex = 0;
+        this.typeCode();
+      }, 3000);
+    }
+  }
+};
+
+// ==================== 3D PARALLAX EFFECTS ====================
+const parallax3D = {
+  init() {
+    if (CONFIG.animations.reducedMotion) return;
+    
+    const heroVisual = document.querySelector('.hero-visual');
+    const profileContainer = document.querySelector('.profile-image-container');
+    
+    if (heroVisual) {
+      this.addParallax(heroVisual);
+    }
+    
+    if (profileContainer) {
+      this.addParallax(profileContainer);
+    }
+  },
+  
+  addParallax(element) {
+    element.addEventListener('mousemove', (e) => {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      const child = element.querySelector('.code-window, .profile-frame');
+      if (child) {
+        child.style.transform = `
+          translateZ(50px)
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+        `;
+      }
+    });
+    
+    element.addEventListener('mouseleave', () => {
+      const child = element.querySelector('.code-window, .profile-frame');
+      if (child) {
+        child.style.transform = 'translateZ(50px) rotateX(0deg) rotateY(0deg)';
+      }
+    });
+  }
+};
+
+// ==================== ENHANCED NAV SCROLL EFFECT ====================
+const enhancedNav = {
+  init() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', utils.debounce(() => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    }, 10));
   }
 };
 
@@ -827,7 +957,10 @@ document.addEventListener('DOMContentLoaded', () => {
   navScroll.init();
   keyboardNav.init();
   footerYear.init();
-
+  // ADD THESE NEW LINES:
+  typingCodeAnimation.init();
+  parallax3D.init();
+  enhancedNav.init();
   // Content enhancements
   particles.init();
   animations.init();
