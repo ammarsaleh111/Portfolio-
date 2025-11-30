@@ -92,7 +92,7 @@ This version represents a complete overhaul focusing on accessibility, performan
 - **CHANGELOG**: This file documenting all changes
 - **ACCESSIBILITY Report**: Detailed accessibility compliance documentation
 - **Inline Code Comments**: Well-documented JavaScript modules
-- **Configuration Guide**: Clear instructions for EmailJS, Formspree, and customization
+- **Configuration Guide**: Clear instructions for FormSubmit setup and customization
 
 #### Testing
 
@@ -319,14 +319,12 @@ None. All original functionality preserved.
 
 3. **Add PDF**: Place your CV as `Ammar-Ahmed-Saleh-CV.pdf` in root directory
 
-4. **Configure EmailJS**: Update configuration in `scripts.js`:
+4. **Configure FormSubmit**: Update the endpoint in `scripts.js` (and `js/scripts.js`):
 
    ```javascript
    const CONFIG = {
-     emailJS: {
-       serviceID: "your_service_id",
-       templateID: "your_template_id",
-       publicKey: "your_public_key",
+     formSubmit: {
+       endpoint: "https://formsubmit.co/ajax/your@email.com",
      },
    };
    ```

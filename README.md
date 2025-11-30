@@ -11,7 +11,7 @@ Modern, accessible, and performant personal portfolio website showcasing full-st
 - **Dark/Light Theme**: Toggle between themes with localStorage persistence
 - **Interactive Animations**: Smooth GSAP animations with reduced-motion support
 - **Project Filtering**: Filter projects by technology stack
-- **Contact Form**: Integrated with EmailJS for real-time submissions
+- **Contact Form**: Powered by FormSubmit for reliable email delivery
 - **SEO Optimized**: Complete meta tags, Open Graph, and JSON-LD structured data
 
 ## 📋 Table of Contents
@@ -107,61 +107,23 @@ portfolio/
 
 ## ⚙️ Configuration
 
-### EmailJS Setup (Contact Form)
+### FormSubmit Setup (Contact Form)
 
-1. Sign up at [EmailJS](https://www.emailjs.com/)
-2. Create an email service
-3. Create an email template
-4. Get your public key
-5. Update `scripts-enhanced.js`:
+1. Go to [FormSubmit](https://formsubmit.co/) and add your email address.
+2. In `index.html`, set the form `action` to `https://formsubmit.co/your@email.com`.
+3. Add optional hidden inputs for `_subject`, `_captcha`, `_template`, and `_autoresponse` (already included in this repo).
+4. Update the JavaScript configuration so AJAX submissions hit the same inbox:
 
 ```javascript
 const CONFIG = {
-  emailJS: {
-    serviceID: "your_service_id", // Replace
-    templateID: "your_template_id", // Replace
-    publicKey: "your_public_key", // Replace
+  formSubmit: {
+    endpoint: "https://formsubmit.co/ajax/your@email.com",
   },
   // ...
 };
 ```
 
-#### EmailJS Template Variables
-
-Your template should include these variables:
-
-- `{{from_name}}` - Sender's name
-- `{{reply_to}}` - Sender's email
-- `{{message}}` - Message content
-
-### Alternative: Formspree
-
-If you prefer Formspree:
-
-1. Sign up at [Formspree](https://formspree.io/)
-2. Create a form
-3. Replace the form submission code:
-
-```javascript
-// In scripts-enhanced.js, replace the submit method:
-async submit() {
-  const form = document.getElementById('contactForm');
-  const formData = new FormData(form);
-
-  const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  });
-
-  if (response.ok) {
-    this.showStatus('success', 'Message sent successfully!');
-    form.reset();
-  } else {
-    this.showStatus('error', 'Failed to send message.');
-  }
-}
-```
+5. The contact form will validate inputs client-side and post JSON directly to FormSubmit. Successful responses show a confirmation message without leaving the page; failures prompt the user to email you directly.
 
 ### CV Download
 
@@ -468,7 +430,7 @@ Ammar Ahmed Saleh
 - [GSAP](https://greensock.com/gsap/) for animations
 - [Particles.js](https://vincentgarreau.com/particles.js/) for background effects
 - [Inter Font](https://rsms.me/inter/) for typography
-- [EmailJS](https://www.emailjs.com/) for contact form functionality
+- [FormSubmit](https://formsubmit.co/) for contact form functionality
 
 ---
 

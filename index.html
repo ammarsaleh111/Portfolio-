@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Primary Meta Tags -->
-    <title>
-      Ammar Ahmed Saleh — Front-End Developer | Modern Web Experiences
-    </title>
+    <title>Ammar Ahmed Saleh — Front-End Developer</title>
     <meta
       name="title"
       content="Ammar Ahmed Saleh — Front-End Developer | Modern Web Experiences"
@@ -71,7 +69,6 @@
       rel="stylesheet"
     />
 
-    <!-- Critical CSS inlined for performance -->
     <style>
       :root {
         --bg: #0a0f16;
@@ -445,7 +442,21 @@
               class="contact-form panel-left"
               novalidate
               aria-labelledby="contact-heading"
+              action="https://formsubmit.co/ammarsaleh890@gmail.com"
+              method="POST"
             >
+              <input
+                type="hidden"
+                name="_subject"
+                value="New portfolio inquiry"
+              />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input
+                type="hidden"
+                name="_autoresponse"
+                value="Thanks for reaching out! I'll reply as soon as possible."
+              />
               <div class="form-group">
                 <label for="from_name" class="sr-only">Your Name</label>
                 <input
@@ -543,7 +554,7 @@
                 </a>
                 <a
                   class="btn outline"
-                  href="mailto:ammar@example.com?subject=Hello%20Ammar&body=I%20saw%20your%20portfolio!"
+                  href="mailto:ammarsaleh890@gmail.com?subject=Hello%20Ammar&body=I%20saw%20your%20portfolio!"
                   aria-label="Send me an email"
                 >
                   <span aria-hidden="true">✉️</span> Email
@@ -589,11 +600,7 @@
       src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
       defer
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"
-      defer
-    ></script>
-    <script src="projects-data.js" defer></script>
-    <script src="scripts.js" defer></script>
+    <script src="js/projects-data.js" defer></script>
+    <script src="js/scripts.js" defer></script>
   </body>
 </html>
