@@ -208,6 +208,7 @@
                 class="btn primary"
                 href="#projects"
                 aria-label="View my projects"
+                style="opacity: 1"
               >
                 View Projects
               </a>
@@ -215,6 +216,7 @@
                 class="btn outline"
                 href="#download"
                 aria-label="Download my CV"
+                style="opacity: 1"
               >
                 Download CV
               </a>
@@ -330,155 +332,24 @@
             <button class="filter active" data-filter="all" aria-pressed="true">
               All
             </button>
-            <button class="filter" data-filter="web" aria-pressed="false">
-              Web
+            <button class="filter" data-filter="fullstack" aria-pressed="false">
+              Full-stack
             </button>
-            <button class="filter" data-filter="java" aria-pressed="false">
-              Java
+            <button class="filter" data-filter="desktop" aria-pressed="false">
+              Desktop Applications
             </button>
             <button class="filter" data-filter="frontend" aria-pressed="false">
-              Front-End
+              Front-end Developing
             </button>
           </div>
 
-          <div class="project-grid" id="projectGrid">
-            <article class="project-card" data-category="web frontend">
-              <div class="thumb">
-                <img
-                  src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop&q=80"
-                  alt="E-Commerce Platform project screenshot showing product grid and shopping cart"
-                  width="800"
-                  height="600"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="proj-body">
-                <h3>E-Commerce Platform</h3>
-                <p>
-                  Full-stack e-commerce solution with payment integration, admin
-                  dashboard, and real-time inventory management.
-                </p>
-                <div class="tags" role="list">
-                  <span role="listitem">React</span>
-                  <span role="listitem">Node.js</span>
-                  <span role="listitem">MongoDB</span>
-                  <span role="listitem">Stripe</span>
-                </div>
-                <div class="proj-actions">
-                  <a
-                    class="btn small"
-                    href="https://demo.example.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View E-Commerce Platform demo"
-                  >
-                    Demo
-                  </a>
-                  <a
-                    class="btn small outline"
-                    href="https://github.com/ammarsaleh111/ecommerce"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View E-Commerce Platform source code"
-                  >
-                    Code
-                  </a>
-                </div>
-              </div>
-            </article>
+          <div class="project-grid" id="projectGrid"></div>
 
-            <article class="project-card" data-category="web frontend">
-              <div class="thumb">
-                <img
-                  src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop&q=80"
-                  alt="Task Management System project screenshot with kanban board"
-                  width="800"
-                  height="600"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="proj-body">
-                <h3>Task Management System</h3>
-                <p>
-                  Collaborative task management app with real-time updates,
-                  drag-and-drop interface, and team analytics.
-                </p>
-                <div class="tags" role="list">
-                  <span role="listitem">React</span>
-                  <span role="listitem">Firebase</span>
-                  <span role="listitem">Tailwind</span>
-                </div>
-                <div class="proj-actions">
-                  <a
-                    class="btn small"
-                    href="https://demo.example.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Task Management System demo"
-                  >
-                    Demo
-                  </a>
-                  <a
-                    class="btn small outline"
-                    href="https://github.com/ammarsaleh111/task-manager"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Task Management System source code"
-                  >
-                    Code
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card" data-category="java backend">
-              <div class="thumb">
-                <img
-                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&q=80"
-                  alt="Spring Boot Microservices architecture diagram"
-                  width="800"
-                  height="600"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="proj-body">
-                <h3>Spring Boot Microservices</h3>
-                <p>
-                  Scalable microservices architecture with service discovery,
-                  API gateway, and distributed tracing.
-                </p>
-                <div class="tags" role="list">
-                  <span role="listitem">Java</span>
-                  <span role="listitem">Spring Boot</span>
-                  <span role="listitem">Docker</span>
-                  <span role="listitem">Kubernetes</span>
-                </div>
-                <div class="proj-actions">
-                  <a
-                    class="btn small"
-                    href="https://demo.example.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Spring Boot Microservices demo"
-                  >
-                    Demo
-                  </a>
-                  <a
-                    class="btn small outline"
-                    href="https://github.com/ammarsaleh111/microservices"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Spring Boot Microservices source code"
-                  >
-                    Code
-                  </a>
-                </div>
-              </div>
-            </article>
-          </div>
+          <!-- Single Show More Button -->
+          <button class="show-more-btn" id="showMoreBtn" style="display: flex">
+            <span class="show-more-text">Show More</span>
+            <span class="show-less-text" style="display: none">Show Less</span>
+          </button>
         </div>
       </section>
 
@@ -722,6 +593,7 @@
       src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"
       defer
     ></script>
+    <script src="projects-data.js" defer></script>
     <script src="scripts.js" defer></script>
   </body>
 </html>

@@ -112,8 +112,7 @@ const themeManager = {
   setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    
-    // Update aria-live announcement
+
     const toggle = document.getElementById('themeToggle');
     if (toggle) {
       toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
@@ -128,6 +127,7 @@ const mobileNav = {
   init() {
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('navMenu');
+
     if (!toggle || !menu) return;
 
     toggle.addEventListener('click', () => {
@@ -135,14 +135,13 @@ const mobileNav = {
       this.setMenuState(!isOpen);
     });
 
-    // Close menu when clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         this.setMenuState(false);
+        toggle.focus();
       });
     });
 
-    // Close menu on escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
         this.setMenuState(false);
@@ -150,7 +149,6 @@ const mobileNav = {
       }
     });
 
-    // Close menu on outside click
     document.addEventListener('click', (e) => {
       if (!toggle.contains(e.target) && !menu.contains(e.target)) {
         this.setMenuState(false);
@@ -542,6 +540,10 @@ const countUp = {
 // Project Filtering
 // ==============================================
 const projectFilter = {
+  currentFilter: 'all',
+  baseLimit: 3,
+  lastCounts: { totalMatches: 0, visibleCount: 0 },
+  
   init() {
     const filters = document.querySelectorAll('.filter');
     const projectGrid = document.getElementById('projectGrid');
@@ -552,34 +554,222 @@ const projectFilter = {
       button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
         
-        // Update active state
         filters.forEach(btn => {
           const isActive = btn === button;
           btn.classList.toggle('active', isActive);
           btn.setAttribute('aria-pressed', isActive);
         });
 
-        // Filter projects
-        this.filterProjects(filter);
+        this.currentFilter = filter;
+        this.resetShowMore();
+        this.filterProjects(filter, { suppressAnimation: true });
       });
     });
+
+    this.filterProjects(this.currentFilter, { suppressAnimation: true });
   },
 
-  filterProjects(filter) {
+  filterProjects(filter, options = {}) {
     const cards = document.querySelectorAll('.project-card');
+    const limit = (options && typeof options.limit === 'number') ? options.limit : this.baseLimit;
+    const suppressAnimation = (options && Object.prototype.hasOwnProperty.call(options, 'suppressAnimation'))
+      ? options.suppressAnimation
+      : false;
+    let matchIndex = 0;
     
     cards.forEach(card => {
-      const categories = card.getAttribute('data-category') || '';
-      const shouldShow = filter === 'all' || categories.includes(filter);
-      
-      if (shouldShow) {
-        card.style.display = '';
-        card.setAttribute('aria-hidden', 'false');
+      const category = card.getAttribute('data-category') || '';
+      const matchesFilter = filter === 'all' || category === filter;
+
+      if (matchesFilter) {
+        if (matchIndex < limit) {
+          this.showCard(card, suppressAnimation);
+        } else {
+          this.hideCard(card, suppressAnimation);
+        }
+        matchIndex++;
       } else {
-        card.style.display = 'none';
-        card.setAttribute('aria-hidden', 'true');
+        this.hideCard(card, suppressAnimation);
       }
     });
+
+    const totalMatches = matchIndex;
+    const visibleNow = Math.min(totalMatches, limit);
+    this.lastCounts = { totalMatches, visibleCount: visibleNow };
+    this.toggleShowMoreButton(totalMatches, visibleNow);
+    return this.lastCounts;
+  },
+  
+  resetShowMore() {
+    if (typeof showMoreProjects !== 'undefined' && typeof showMoreProjects.resetSteps === 'function') {
+      showMoreProjects.resetSteps();
+      return;
+    }
+
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    if (showMoreBtn) {
+      showMoreBtn.classList.remove('expanded');
+    }
+  },
+
+  showCard(card, suppressAnimation = false) {
+    this.clearCollapseTimer(card);
+    card.classList.remove('hidden-project', 'collapsing');
+    card.style.display = '';
+    card.setAttribute('aria-hidden', 'false');
+
+    if (!suppressAnimation) {
+      card.classList.add('expanding');
+      card.addEventListener('animationend', () => {
+        card.classList.remove('expanding');
+      }, { once: true });
+    } else {
+      card.classList.remove('expanding');
+    }
+  },
+
+  hideCard(card, suppressAnimation = false) {
+    const finalize = () => {
+      card.style.display = 'none';
+      card.classList.add('hidden-project');
+      card.classList.remove('collapsing', 'expanding');
+      card.setAttribute('aria-hidden', 'true');
+      this.clearCollapseTimer(card);
+    };
+
+    if (suppressAnimation || card.style.display === 'none') {
+      finalize();
+      return;
+    }
+
+    this.clearCollapseTimer(card);
+    card.classList.add('collapsing');
+    const timeoutId = window.setTimeout(finalize, 250);
+    card.dataset.collapseTimeout = timeoutId;
+  },
+
+  clearCollapseTimer(card) {
+    const timeoutId = card.dataset.collapseTimeout;
+    if (timeoutId) {
+      clearTimeout(Number(timeoutId));
+      delete card.dataset.collapseTimeout;
+    }
+  },
+
+  toggleShowMoreButton(totalMatches, visibleCount) {
+    if (typeof showMoreProjects !== 'undefined' && typeof showMoreProjects.handleCountsUpdate === 'function') {
+      showMoreProjects.handleCountsUpdate(totalMatches, visibleCount);
+      return;
+    }
+
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    if (!showMoreBtn) return;
+    showMoreBtn.style.display = totalMatches > visibleCount ? 'inline-flex' : 'none';
+  }
+};
+
+// ==============================================
+// Show More Projects
+// ==============================================
+const showMoreProjects = {
+  baseLimit: 3,
+  chunkSize: 3,
+  currentStep: 0,
+  totalMatches: 0,
+  visibleCount: 0,
+  button: null,
+  showMoreText: null,
+  showLessText: null,
+
+  cacheElements() {
+    if (!this.button) {
+      this.button = document.getElementById('showMoreBtn');
+    }
+    if (this.button && !this.showMoreText) {
+      this.showMoreText = this.button.querySelector('.show-more-text');
+    }
+    if (this.button && !this.showLessText) {
+      this.showLessText = this.button.querySelector('.show-less-text');
+    }
+  },
+
+  init() {
+    this.cacheElements();
+    if (!this.button) return;
+
+    this.button.addEventListener('click', () => this.handleClick());
+    this.handleCountsUpdate(projectFilter.lastCounts.totalMatches, projectFilter.lastCounts.visibleCount);
+    this.updateLabel();
+  },
+
+  handleCountsUpdate(total, visible) {
+    this.cacheElements();
+    this.totalMatches = total || 0;
+    this.visibleCount = visible || 0;
+
+    if (!this.button) return;
+
+    if (this.totalMatches <= this.baseLimit) {
+      this.button.style.display = 'none';
+      this.currentStep = 0;
+      this.button.classList.remove('expanded');
+      return;
+    }
+
+    this.button.style.display = 'inline-flex';
+    this.button.classList.toggle('expanded', this.currentStep === 2);
+    this.updateLabel();
+  },
+
+  resetSteps() {
+    this.cacheElements();
+    if (!this.button) return;
+    this.currentStep = 0;
+    this.button.classList.remove('expanded');
+    this.updateLabel();
+  },
+
+  handleClick() {
+    this.cacheElements();
+    if (!this.button || this.totalMatches <= this.baseLimit) return;
+
+    if (this.currentStep === 0) {
+      const target = Math.min(this.baseLimit + this.chunkSize, this.totalMatches);
+      projectFilter.filterProjects(projectFilter.currentFilter, { limit: target });
+      this.currentStep = (this.totalMatches > target) ? 1 : 2;
+    } else if (this.currentStep === 1) {
+      projectFilter.filterProjects(projectFilter.currentFilter, { limit: this.totalMatches });
+      this.currentStep = 2;
+    } else {
+      projectFilter.filterProjects(projectFilter.currentFilter, { limit: this.baseLimit });
+      this.currentStep = 0;
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    this.button.classList.toggle('expanded', this.currentStep === 2);
+    this.updateLabel();
+  },
+
+  updateLabel() {
+    this.cacheElements();
+    if (!this.button || !this.showMoreText || !this.showLessText) return;
+
+    if (this.currentStep === 0) {
+      const remaining = Math.max(this.totalMatches - this.baseLimit, 0);
+      const chunk = Math.min(this.chunkSize, remaining);
+      this.showMoreText.textContent = chunk > 0
+        ? `Show ${chunk} more project${chunk === 1 ? '' : 's'}`
+        : 'Show more projects';
+      this.showLessText.textContent = 'Show less';
+    } else if (this.currentStep === 1) {
+      this.showMoreText.textContent = 'Show all projects';
+      this.showLessText.textContent = 'Show less';
+    } else {
+      this.showLessText.textContent = 'Show less';
+    }
   }
 };
 
@@ -820,26 +1010,19 @@ const typingCodeAnimation = {
     'function buildFuture() {',
     '  return creative.code();',
     '}',
-    '',
     'class Developer {',
     '  constructor() {',
     '    this.passion = Infinity;',
     '    this.creativity = "limitless";',
     '  }',
-    '  ',
     '  createMagic() {',
     '    return this.passion * Math.pow(10, 3);',
     '  }',
-    '}',
-    '',
-    '// Let\'s create magic ✨',
-    'const ammar = new Developer();',
-    'console.log(ammar.createMagic());'
-  ],
+    '}',  ],
   
   lineIndex: 0,
   charIndex: 0,
-  typingSpeed: 50,
+  typingSpeed: 10,
   lineDelay: 500,
   
   init() {
@@ -965,7 +1148,11 @@ document.addEventListener('DOMContentLoaded', () => {
   particles.init();
   animations.init();
   countUp.init();
+  if (typeof projectsRenderer !== 'undefined') {
+    projectsRenderer.render();
+  }
   projectFilter.init();
+  showMoreProjects.init();
   cvDownload.init();
   contactForm.init();
   lazyImages.init();
