@@ -158,7 +158,10 @@ const projectsRenderer = {
 
     const thumb = document.createElement('div');
     thumb.className = 'thumb';
-    thumb.appendChild(this.createImage(project));
+    const thumbTrigger = this.createImageTrigger(project);
+    if (thumbTrigger) {
+      thumb.appendChild(thumbTrigger);
+    }
 
     const body = document.createElement('div');
     body.className = 'proj-body';
@@ -174,6 +177,34 @@ const projectsRenderer = {
     article.appendChild(thumb);
     article.appendChild(body);
     return article;
+  },
+
+  createImageTrigger(project) {
+    const fullSrc = project.image?.full || project.image?.src || '';
+    const altText = project.image?.alt || project.title;
+
+    if (!fullSrc) {
+      return this.createImage(project);
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'thumb-button';
+    button.setAttribute('aria-label', `View ${project.title} in full resolution`);
+    button.dataset.fullImage = fullSrc;
+    button.dataset.imageAlt = altText;
+    button.dataset.projectTitle = project.title;
+
+    const img = this.createImage(project);
+    button.appendChild(img);
+
+    button.addEventListener('click', () => {
+      const lightbox = globalThis.projectLightbox;
+      if (!lightbox) return;
+      lightbox.open(fullSrc, altText, project.title);
+    });
+
+    return button;
   },
 
   createImage(project) {

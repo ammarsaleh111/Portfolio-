@@ -4,10 +4,10 @@
 const CACHE_NAME = 'portfolio-v2.0.0';
 const urlsToCache = [
   '/',
-  '/index-enhanced.html',
-  '/style-enhanced.css',
-  '/scripts-enhanced.js',
-  '/me.jpg',
+  '/index.html',
+  '/style.css',
+  '/js/scripts.js',
+  '/assets/me.jpg',
   '/Ammar-Ahmed-Saleh-CV.pdf',
   // Add other critical assets
 ];

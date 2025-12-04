@@ -769,6 +769,177 @@ const cvDownload = {
 };
 
 // ==============================================
+// Project Lightbox
+// ==============================================
+const projectLightbox = {
+  init() {
+    this.createLightbox();
+    this.bindGlobalEvents();
+  },
+
+  createLightbox() {
+    if (this.overlay) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'project-lightbox';
+    overlay.id = 'projectLightbox';
+    overlay.setAttribute('hidden', '');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    const inner = document.createElement('div');
+    inner.className = 'lightbox-inner';
+    inner.setAttribute('role', 'dialog');
+    inner.setAttribute('aria-modal', 'true');
+    inner.setAttribute('aria-labelledby', 'lightbox-caption');
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'lightbox-close';
+    closeBtn.setAttribute('aria-label', 'Close image preview');
+    closeBtn.textContent = '×';
+
+    const image = document.createElement('img');
+    image.className = 'lightbox-image';
+    image.alt = '';
+    image.decoding = 'async';
+    image.loading = 'lazy';
+
+    const caption = document.createElement('p');
+    caption.className = 'lightbox-caption';
+    caption.id = 'lightbox-caption';
+
+    inner.append(closeBtn, image, caption);
+    overlay.appendChild(inner);
+    document.body.appendChild(overlay);
+
+    this.overlay = overlay;
+    this.dialog = inner;
+    this.imageEl = image;
+    this.captionEl = caption;
+    this.closeBtn = closeBtn;
+
+    closeBtn.addEventListener('click', () => this.close());
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        this.close();
+      }
+    });
+  },
+
+  bindGlobalEvents() {
+    this.handleKeydown = (event) => {
+      if (!this.isOpen()) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        this.close();
+      } else if (event.key === 'Tab') {
+        this.trapFocus(event);
+      }
+    };
+
+    document.addEventListener('keydown', this.handleKeydown);
+  },
+
+  open(src, alt, title) {
+    if (!src) return;
+    if (!this.overlay) {
+      this.createLightbox();
+    }
+
+    this.lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    this.imageEl.src = src;
+    this.imageEl.alt = alt || title || 'Project preview image';
+    this.captionEl.textContent = title || alt || '';
+
+    this.overlay.removeAttribute('hidden');
+    this.overlay.setAttribute('aria-hidden', 'false');
+
+    requestAnimationFrame(() => {
+      this.overlay?.classList.add('open');
+    });
+
+    this.lockScroll();
+    window.setTimeout(() => this.closeBtn?.focus(), 0);
+  },
+
+  close() {
+    if (!this.overlay || !this.isOpen()) return;
+
+    this.overlay.classList.remove('open');
+    this.overlay.setAttribute('aria-hidden', 'true');
+
+    const cleanup = () => {
+      if (!this.overlay) return;
+      this.overlay.setAttribute('hidden', '');
+      this.imageEl.src = '';
+    };
+
+    const onTransitionEnd = (event) => {
+      if (event.target !== this.overlay) return;
+      cleanup();
+    };
+
+    this.overlay.addEventListener('transitionend', onTransitionEnd, { once: true });
+    window.setTimeout(() => {
+      if (this.overlay && !this.overlay.hasAttribute('hidden')) {
+        cleanup();
+      }
+    }, 400);
+
+    this.unlockScroll();
+
+    if (this.lastFocused && typeof this.lastFocused.focus === 'function') {
+      this.lastFocused.focus();
+    }
+  },
+
+  isOpen() {
+    return this.overlay?.classList.contains('open');
+  },
+
+  lockScroll() {
+    if (this.scrollLocked) return;
+    this.previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    this.scrollLocked = true;
+  },
+
+  unlockScroll() {
+    if (!this.scrollLocked) return;
+    document.body.style.overflow = this.previousOverflow || '';
+    this.scrollLocked = false;
+  },
+
+  trapFocus(event) {
+    const focusable = this.dialog?.querySelectorAll(
+      'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+    );
+
+    if (!focusable || !focusable.length) {
+      event.preventDefault();
+      this.closeBtn?.focus();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey) {
+      if (document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else if (document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+};
+
+globalThis.projectLightbox = projectLightbox;
+
+// ==============================================
 // Contact Form
 // ==============================================
 const contactForm = {
@@ -1131,6 +1302,7 @@ document.addEventListener('DOMContentLoaded', () => {
   projectFilter.init();
   showMoreProjects.init();
   cvDownload.init();
+  projectLightbox.init();
   contactForm.init();
   lazyImages.init();
 
@@ -1146,7 +1318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==============================================
 if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/js/sw.js')
       .then(reg => console.log('Service Worker registered:', reg.scope))
       .catch(err => console.log('Service Worker registration failed:', err));
   });
