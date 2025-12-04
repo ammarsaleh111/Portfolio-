@@ -36,119 +36,99 @@ const projectsData = [
       src: 'assets/HMS-guest.png',
       alt: 'Hotel Management System'
     },
-    tags: ['Electron', 'React', 'Node.js'],
+    tags: ['java', 'javaFX', 'SceneBuilder', 'FileDB', 'OOP'],
     links: [
       { label: 'Code', url: 'https://github.com/ammarsaleh111/Hotel_Management_System', variant: 'outline' }
     ]
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Real-time analytics platform with data visualization, custom reports, and team collaboration features.',
-    category: 'fullstack',
-    image: {
-      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80',
-      alt: 'Analytics Dashboard'
-    },
-    tags: ['Vue.js', 'Express', 'PostgreSQL', 'Chart.js'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'Microservices Platform',
-    description: 'Scalable microservices architecture with service discovery, API gateway, and distributed tracing capabilities.',
-    category: 'fullstack',
-    image: {
-      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&q=80',
-      alt: 'Microservices Architecture'
-    },
-    tags: ['Java', 'Spring Boot', 'Docker', 'Kubernetes'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'Social Media Platform',
-    description: 'Full-featured social network with posts, comments, real-time chat, and media sharing capabilities.',
-    category: 'fullstack',
-    image: {
-      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80',
-      alt: 'Social Media Platform'
-    },
-    tags: ['React', 'Node.js', 'Socket.io', 'Redis'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'Portfolio Website Builder',
-    description: 'Drag-and-drop portfolio builder with customizable templates, animations, and responsive design.',
+  },{
+    title: 'Calculator',
+    description: 'A modern and user-friendly calculator web application with basic and advanced functionalities for everyday calculations.',
     category: 'frontend',
     image: {
-      src: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop&q=80',
-      alt: 'Portfolio Website Builder'
+      src: 'assets/calculator.png',
+      alt: 'Calculator Application'
     },
-    tags: ['React', 'GSAP', 'CSS Grid'],
+    tags: ['html', 'JavaScript', 'css'],
     links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
+      { label: 'Demo', url: 'https://ammarsaleh111.github.io/Calculator/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Calculator', variant: 'outline' }
     ]
-  },
-  {
-    title: 'Weather Forecast App',
-    description: 'Beautiful weather app with 7-day forecast, animations, and location-based weather alerts.',
-    category: 'frontend',
-    image: {
-      src: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&q=80',
-      alt: 'Weather Forecast App'
-    },
-    tags: ['Vue.js', 'API', 'CSS'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'Music Player Interface',
-    description: 'Modern music player with playlist management, visualizer effects, and custom controls.',
-    category: 'frontend',
-    image: {
-      src: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&q=80',
-      alt: 'Music Player Interface'
-    },
-    tags: ['JavaScript', 'Web Audio API', 'CSS'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'File Manager Pro',
-    description: 'Advanced file manager with search, preview, and bulk operations for efficient file organization.',
+  },{
+    title: 'Fireboy and Watergirl Game',
+    description: 'A fun and interactive desktop game where players control two characters to solve puzzles and navigate through levels',
     category: 'desktop',
     image: {
-      src: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop&q=80',
-      alt: 'File Manager Interface'
+      src: 'assets/game.jpg',
+      alt: 'Fireboy and Watergirl Game'
     },
-    tags: ['Electron', 'TypeScript', 'SQLite'],
+    tags: ['C++', 'OOP', 'SFML', 'FileDB'],
     links: [
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Fireboy_and_Watergirl_Game', variant: 'outline' }
     ]
   },
   {
-    title: 'Note Taking Desktop App',
-    description: 'Rich-text note-taking app with markdown support, tags, and cloud sync functionality.',
+    title: 'Coder_platform',
+    description: 'A sleek and modern web template designed for coding bootcamps and developer portfolios, featuring responsive design and user-friendly navigation.',
+    category: 'frontend',
+    image: {
+      src: 'assets/coder.png',
+      alt: 'Coder Platform'
+    },
+    tags: ['html','css', 'JavaScript'],
+    links: [
+      { label: 'Demo', url: 'https://ammarsaleh111.github.io/Coder_Platform/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Coder_Platform', variant: 'outline' }
+    ]
+  },{
+    title: 'Event Management System',
+    description: 'Desktop application for organizing and managing events, including scheduling, attendee tracking, and resource allocation.',
     category: 'desktop',
     image: {
-      src: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&q=80',
-      alt: 'Note Taking App'
+      src: 'assets/EMS.jpg',
+      alt: 'Event Management System'
     },
-    tags: ['Electron', 'Vue.js', 'IndexedDB'],
+    tags: ['java', 'javaFX', 'SceneBuilder', 'FileDB', 'OOP'],
     links: [
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Event_Management_System', variant: 'outline' }
+    ]
+  },{
+    title: '3rd Elzero Web Design Course Project',
+    description: 'A comprehensive web design project created as part of the Elzero Web Design Course, showcasing responsive design and modern web development techniques.',
+    category: 'frontend',
+    image: {
+      src: 'assets/Ammar.png',
+      alt: '3rd Elzero Web Design Course Project'
+    },
+    tags: ['html', 'JavaScript', 'css'],
+    links: [
+      { label: 'Demo', url: 'https://ammarsaleh111.github.io/Ammar_world_template/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Ammar_world_template', variant: 'outline' }
+    ]
+  },{
+    title: 'Sparkle_Creative_template',
+    description: 'A visually appealing and responsive web template designed for creative portfolios and agencies, featuring modern design elements and user-friendly navigation.',
+    category: 'frontend',
+    image: {
+      src: 'assets/Sparkle.png',
+      alt: 'Sparkle Creative Template'
+    },
+    tags: ['html','css'],
+    links: [
+      { label: 'Demo', url: 'https://ammarsaleh111.github.io/Sparkle_Creative_Template/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Sparkle_Creative_Template', variant: 'outline' }
+    ]
+  },{
+    title: 'Montal_Creative_template',
+    description: 'A Simple and elegant web template designed for creative portfolios and agencies, featuring modern design elements and user-friendly navigation.',
+    category: 'frontend',
+    image: {
+      src: 'assets/Montal.png',
+      alt: 'Montal Creative Template'
+    },
+    tags: ['html','css'],
+    links: [
+      { label: 'Demo', url: 'https://ammarsaleh111.github.io/Montal_Creative_Template/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Montal_Creative_Template', variant: 'outline' }
     ]
   }
 ];
