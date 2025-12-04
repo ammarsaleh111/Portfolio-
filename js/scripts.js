@@ -1,8 +1,3 @@
-/**
- * Enhanced Portfolio JavaScript
- * Modern, accessible, performant interactions
- */
-
 // ==============================================
 // Configuration
 // ==============================================
@@ -23,9 +18,7 @@ const CONFIG = {
 // Utility Functions
 // ==============================================
 const utils = {
-  /**
-   * Debounce function calls
-   */
+  
   debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -38,9 +31,7 @@ const utils = {
     };
   },
 
-  /**
-   * Check if element is in viewport
-   */
+
   isInViewport(element, offset = 0) {
     const rect = element.getBoundingClientRect();
     return (
@@ -51,9 +42,7 @@ const utils = {
     );
   },
 
-  /**
-   * Animate number counting
-   */
+
   animateCount(element, target, duration = 1200) {
     const start = 0;
     const startTime = performance.now();
@@ -88,18 +77,15 @@ const themeManager = {
     const toggle = document.getElementById('themeToggle');
     if (!toggle) return;
 
-    // Get saved theme or default to 'dark'
     const savedTheme = localStorage.getItem('theme') || 'dark';
     this.setTheme(savedTheme);
 
-    // Listen for toggle clicks
     toggle.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       this.setTheme(newTheme);
     });
 
-    // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       if (!localStorage.getItem('theme')) {
         this.setTheme(e.matches ? 'dark' : 'light');
@@ -161,16 +147,13 @@ const mobileNav = {
     toggle.setAttribute('aria-expanded', isOpen);
     menu.classList.toggle('open', isOpen);
 
-    // Manage focus trap when menu is open
     if (isOpen) {
       const focusableElements = menu.querySelectorAll('a, button');
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
 
-      // Focus first element
       setTimeout(() => firstElement?.focus(), 100);
 
-      // Trap focus within menu
       this.trapFocus(firstElement, lastElement);
     }
   },
@@ -194,7 +177,6 @@ const mobileNav = {
 
     document.addEventListener('keydown', handleTabKey);
     
-    // Remove listener when menu closes
     const observer = new MutationObserver(() => {
       const menu = document.getElementById('navMenu');
       if (!menu?.classList.contains('open')) {
@@ -234,7 +216,6 @@ const smoothScroll = {
           behavior: 'smooth'
         });
 
-        // Update focus for accessibility
         target.setAttribute('tabindex', '-1');
         target.focus();
         target.removeAttribute('tabindex');
@@ -292,7 +273,7 @@ const navScroll = {
     }, 10);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll(); 
   }
 };
 
@@ -301,13 +282,11 @@ const navScroll = {
 // ==============================================
 const particles = {
   init() {
-    // Only initialize if particles.js library is loaded
     if (typeof particlesJS === 'undefined') return;
 
     const container = document.getElementById('particles-js');
     if (!container) return;
 
-    // Reduce particle count on mobile
     const isMobile = window.innerWidth < 768;
     const particleCount = isMobile ? 30 : 60;
 
@@ -413,7 +392,6 @@ const animations = {
   },
 
   showAllElements() {
-    // Ensure content is visible if animations are disabled
     document.querySelectorAll('[data-animate]').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
@@ -425,7 +403,6 @@ const animations = {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animate cards
     gsap.utils.toArray('.card').forEach((card, index) => {
       gsap.from(card, {
         scrollTrigger: {
@@ -441,7 +418,6 @@ const animations = {
       });
     });
 
-    // Animate project cards
     gsap.utils.toArray('.project-card').forEach((card, index) => {
       gsap.from(card, {
         scrollTrigger: {
@@ -457,7 +433,6 @@ const animations = {
       });
     });
 
-    // Animate CV panel
     const cvPanel = document.querySelector('.cv-panel');
     if (cvPanel) {
       gsap.from(cvPanel, {
@@ -780,7 +755,6 @@ const cvDownload = {
     if (!downloadBtn) return;
 
     downloadBtn.addEventListener('click', (e) => {
-      // Check if PDF file exists, otherwise use fallback
       const href = downloadBtn.getAttribute('href');
       if (!href || href === '#') {
         e.preventDefault();
@@ -790,7 +764,6 @@ const cvDownload = {
   },
 
   handleFallback() {
-    // If PDF doesn't exist, open Google Drive folder
     window.open(CONFIG.cvDownload.fallbackURL, '_blank', 'noopener,noreferrer');
   }
 };
@@ -811,7 +784,6 @@ const contactForm = {
       this.submit();
     });
 
-    // Real-time validation
     form.querySelectorAll('input, textarea').forEach(field => {
       field.addEventListener('blur', () => {
         this.validateField(field);
@@ -896,7 +868,6 @@ const contactForm = {
       }
     });
 
-    // Update button state
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
 
@@ -935,7 +906,6 @@ const contactForm = {
     status.className = `form-status ${type}`;
     status.textContent = message;
     
-    // Announce to screen readers
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
   }
@@ -958,7 +928,6 @@ const footerYear = {
 // ==============================================
 const keyboardNav = {
   init() {
-    // Add visible focus indicators
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') {
         document.body.classList.add('keyboard-nav');
@@ -977,11 +946,9 @@ const keyboardNav = {
 const lazyImages = {
   init() {
     if ('loading' in HTMLImageElement.prototype) {
-      // Browser supports native lazy loading
       return;
     }
 
-    // Fallback for browsers without native lazy loading
     const images = document.querySelectorAll('img[loading="lazy"]');
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -1012,7 +979,6 @@ const perfMonitor = {
         });
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
       } catch (e) {
-        // Observer not supported
       }
     }
   }
@@ -1072,7 +1038,6 @@ const typingCodeAnimation = {
   }
 };
 
-// ==================== 3D PARALLAX EFFECTS ====================
 const parallax3D = {
   init() {
     if (CONFIG.animations.reducedMotion) return;
@@ -1154,11 +1119,9 @@ document.addEventListener('DOMContentLoaded', () => {
   navScroll.init();
   keyboardNav.init();
   footerYear.init();
-  // ADD THESE NEW LINES:
   typingCodeAnimation.init();
   parallax3D.init();
   enhancedNav.init();
-  // Content enhancements
   particles.init();
   animations.init();
   countUp.init();
@@ -1171,10 +1134,8 @@ document.addEventListener('DOMContentLoaded', () => {
   contactForm.init();
   lazyImages.init();
 
-  // Back to top floating button
   backToTop.init();
 
-  // Performance monitoring (development only)
   if (window.location.hostname === 'localhost') {
     performance.init();
   }
@@ -1215,7 +1176,6 @@ const backToTop = {
       window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
     });
 
-    // Keyboard activation support
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();

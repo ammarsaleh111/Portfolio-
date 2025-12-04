@@ -1,44 +1,44 @@
 // Centralized project metadata for dynamic rendering.
 const projectsData = [
   {
-    title: 'E-Commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration, admin dashboard, and real-time inventory management.',
+    title: 'RAWEE',
+    description: 'RAWEE delivers intelligent IoT solutions to enhance crop yield, optimize resource usage, and drive sustainable farming forward.',
     category: 'fullstack',
     image: {
-      src: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop&q=80',
-      alt: 'E-Commerce Platform'
+      src: 'assets/rawee-home.png',
+      alt: 'RAWEE E-Commerce Platform'
     },
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    tags: ['php', 'mysql', 'html', 'css', 'javascript'],
     links: [
       { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/rawee', variant: 'outline' }
     ]
   },
   {
-    title: 'Code Editor Desktop App',
-    description: 'Lightweight code editor with syntax highlighting, multiple language support, and plugin system.',
+    title: 'WearWay',
+    description: 'WearWay is a cutting-edge e-commerce platform specializing in trendy and sustainable fashion, offering a seamless shopping experience with eco-friendly products.',
+    category: 'frontend',
+    image: {
+      src: 'assets/wearway-home.png',
+      alt: 'WearWay E-Commerce Platform'
+    },
+    tags: ['React', 'JavaScript', 'css', 'Tailwind'],
+    links: [
+      { label: 'Demo', url: 'https://final-project-delta-self.vercel.app/', variant: 'primary' },
+      { label: 'Code', url: 'https://github.com/WEARWAY2/WearWay', variant: 'outline' }
+    ]
+  },
+  {
+    title: 'Hotel Management System',
+    description: 'Desktop application for managing hotel operations including reservations, billing, and customer management.',
     category: 'desktop',
     image: {
-      src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop&q=80',
-      alt: 'Code Editor'
+      src: 'assets/HMS-guest.png',
+      alt: 'Hotel Management System'
     },
     tags: ['Electron', 'React', 'Node.js'],
     links: [
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
-    ]
-  },
-  {
-    title: 'Task Management System',
-    description: 'Collaborative task management app with real-time updates, drag-and-drop interface, and team analytics.',
-    category: 'frontend',
-    image: {
-      src: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop&q=80',
-      alt: 'Task Management System'
-    },
-    tags: ['React', 'Firebase', 'Tailwind'],
-    links: [
-      { label: 'Demo', url: 'https://demo.example.com', variant: 'primary' },
-      { label: 'Code', url: 'https://github.com/ammarsaleh111', variant: 'outline' }
+      { label: 'Code', url: 'https://github.com/ammarsaleh111/Hotel_Management_System', variant: 'outline' }
     ]
   },
   {
